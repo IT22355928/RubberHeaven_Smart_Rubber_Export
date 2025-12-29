@@ -102,7 +102,7 @@ export default function NewTestScreen() {
   const [sheetCount, setSheetCount] = useState("");
   const [batchWeight, setBatchWeight] = useState("");
   const [batchId, setBatchId] = useState(""); // Will be auto-generated
-  const [testerName, setTesterName] = useState("John Doe");
+  const [testerName, setTesterName] = useState(""); // Changed: Empty initial state
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [images, setImages] = useState<string[]>([]);
@@ -319,7 +319,7 @@ export default function NewTestScreen() {
               setImages([]);
               setSheetCount("");
               setBatchWeight("");
-              setTesterName("John Doe");
+              setTesterName(""); // Reset to empty
               const newBatchId = generateBatchId();
               setBatchId(newBatchId);
               navigation.goBack();
@@ -536,7 +536,7 @@ export default function NewTestScreen() {
                 </TouchableOpacity>
               </View>
 
-              {/* Tester Name */}
+              {/* Tester Name - UPDATED with placeholder */}
               <View style={styles.inputContainer}>
                 <Text style={styles.label}>
                   <MaterialCommunityIcons
@@ -547,16 +547,16 @@ export default function NewTestScreen() {
                   Tester Name
                 </Text>
                 <TextInput
-                    mode="outlined"
-                    keyboardType="numeric"
-                    value={sheetCount}
-                    onChangeText={setSheetCount}
-                    placeholder="Enter tester name"
-                    style={styles.equalInput}
-                    theme={{ roundness: 12 }}
-                    outlineColor="#D1D5DB"
-                    activeOutlineColor="#4F46E5"
-                  />
+                  mode="outlined"
+                  value={testerName}
+                  onChangeText={setTesterName}
+                  placeholder="Enter tester name"
+                  placeholderTextColor="#94A3B8"
+                  style={styles.equalInput}
+                  theme={{ roundness: 12 }}
+                  outlineColor="#D1D5DB"
+                  activeOutlineColor="#4F46E5"
+                />
               </View>
 
               {/* Auto-generated Batch/Lot ID - Read Only */}
@@ -676,6 +676,7 @@ export default function NewTestScreen() {
                     value={sheetCount}
                     onChangeText={setSheetCount}
                     placeholder="50"
+                    placeholderTextColor="#94A3B8"
                     style={styles.equalInput}
                     theme={{ roundness: 12 }}
                     outlineColor="#D1D5DB"
@@ -700,6 +701,7 @@ export default function NewTestScreen() {
                     value={batchWeight}
                     onChangeText={setBatchWeight}
                     placeholder="350"
+                    placeholderTextColor="#94A3B8"
                     style={styles.equalInput}
                     right={<TextInput.Affix text="kg" />}
                     theme={{ roundness: 12 }}
@@ -720,7 +722,7 @@ export default function NewTestScreen() {
                   
                   Sample Photos ({images.length}/5)
                 </Text>
-                <Text>( Please only upload RSS rubber sheet images)</Text>
+                <Text style={styles.instructionText}>( Please only upload RSS rubber sheet images)</Text>
                 <View style={styles.imageSection}>
                   {images.length < 5 && (
                     <TouchableOpacity
@@ -1082,6 +1084,13 @@ const styles = StyleSheet.create({
     color: "#374151",
     marginBottom: 8,
     marginLeft: 4,
+  },
+  instructionText: {
+    fontSize: 14,
+    color: "#6B7280",
+    marginTop: 4,
+    marginBottom: 12,
+    fontStyle: "italic",
   },
   requiredLabel: {
     color: "#374151",
